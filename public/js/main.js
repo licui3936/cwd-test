@@ -1,4 +1,4 @@
-// uncomment line below to register offline cache service worker 
+// uncomment line below to register offline cache service worker
 // navigator.serviceWorker.register('../serviceworker.js');
 
 if (typeof fin !== 'undefined') {
@@ -31,4 +31,17 @@ async function init() {
             });
         });
     }
+}
+
+async function launch() {
+    const cwdValue = document.getElementById('cwdInput').value;
+
+    const processIdentity = await fin.System.launchExternalProcess({
+        alias: 'cwdTest',
+        cwd: cwdValue,
+        listener: function (result) {
+            console.log('the exit code', result.exitCode);
+        }
+    });
+    console.log(processIdentity);
 }

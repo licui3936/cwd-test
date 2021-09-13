@@ -12,14 +12,16 @@ async function launchApp() {
     console.log("Connected to runtime version", version);
 
     // Permission cannot control the below call from node. This is expected.
-    /*
-    await fin.System.launchExternalProcess({
-        path: "notepad",
-        arguments: "",
+    fin.System.launchExternalProcess({
+        alias: 'cwdTest',
         listener: function (result) {
             console.log('the exit code', result.exitCode);
         }
-    });*/
+    }).then(processIdentity => {
+        console.log(processIdentity);
+    }).catch(error => {
+        console.log(error);
+    });
 }
 
 launchApp().then(() => {
