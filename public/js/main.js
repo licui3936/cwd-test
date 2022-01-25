@@ -35,13 +35,16 @@ async function init() {
 
 async function launch() {
     const cwdValue = document.getElementById('cwdInput').value;
-
-    const processIdentity = await fin.System.launchExternalProcess({
-        alias: 'cwdTest',
-        cwd: cwdValue,
-        listener: function (result) {
-            console.log('the exit code', result.exitCode);
-        }
-    });
-    console.log(processIdentity);
+	try {
+		const processIdentity = await fin.System.launchExternalProcess({
+			alias: 'cwdTest',
+			cwd: cwdValue,
+			listener: function (result) {
+				console.log('the exit code', result.exitCode);
+			}
+		});
+		console.log(processIdentity);
+	} catch(e) {
+		console.error(e);
+	}
 }
